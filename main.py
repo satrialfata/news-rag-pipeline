@@ -1,5 +1,7 @@
-from src.ingestion.google_news_rss import fetch_news
+from src.chains.rag_chain import ask
 
-news = fetch_news()
-
-print(news[:3])
+print(
+    ask(
+        "Apa berita terbaru mengenai Donald Trump?"
+    )
+)
