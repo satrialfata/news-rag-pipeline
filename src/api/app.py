@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from src.pipeline import run_pipeline
 from src.chains.rag_chain import ask
 
 app = FastAPI(
@@ -29,4 +30,20 @@ def ask_question(request: QuestionRequest):
     return {
         "question": request.question,
         "answer": answer
+    }
+
+
+@app.post("/update-news")
+def update_news():
+
+    run_pipeline()
+
+    return {
+        "message": "News updated successfully"
+    }
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy"
     }
